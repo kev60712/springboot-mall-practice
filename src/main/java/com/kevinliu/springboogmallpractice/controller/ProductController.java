@@ -18,7 +18,7 @@ public class ProductController {
     @GetMapping("/products/{productId}")
     public ResponseEntity<Product> getProduct(@PathVariable Integer productId) {
         Product product = productService.getProductById(productId);
-
+        // TODO: try Optional
         if (product != null){
             return ResponseEntity.status(HttpStatus.OK).body(product);
         }
