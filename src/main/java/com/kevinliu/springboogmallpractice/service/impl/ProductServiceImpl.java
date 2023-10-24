@@ -1,5 +1,6 @@
 package com.kevinliu.springboogmallpractice.service.impl;
 
+import com.kevinliu.springboogmallpractice.dto.ProductRequest;
 import com.kevinliu.springboogmallpractice.model.Product;
 import com.kevinliu.springboogmallpractice.repo.ProductRepo;
 import com.kevinliu.springboogmallpractice.service.ProductService;
@@ -15,5 +16,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Integer productId) {
         return productRepo.getProductById(productId);
+    }
+
+    @Override
+    public Integer createProduct(ProductRequest productRequest) {
+        return productRepo.createProduct(productRequest);
     }
 }
