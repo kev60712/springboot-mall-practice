@@ -32,6 +32,7 @@ public class ProductRepoImpl implements ProductRepo {
 
         Map<String, Object> map = new HashMap<>();
 
+        // Filtering
         if (productQueryParams.getCategory() != null){
             sql = sql + " AND category = :category";
             map.put("category", productQueryParams.getCategory().name());
@@ -41,7 +42,13 @@ public class ProductRepoImpl implements ProductRepo {
             map.put("search", "%" + productQueryParams.getSearch() + "%");
         }
 
+        // Sorting
         sql = sql + " ORDER BY " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
+
+        // Pagination
+        sql = sql + " LIMIT :limit OFFSET :offset";
+        map.put("limit", productQueryParams.getLimit());
+        map.put("offset", productQueryParams.getOffset());
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 
