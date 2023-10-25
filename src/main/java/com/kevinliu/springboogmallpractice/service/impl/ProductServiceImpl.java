@@ -1,6 +1,6 @@
 package com.kevinliu.springboogmallpractice.service.impl;
 
-import com.kevinliu.springboogmallpractice.constant.ProductCategory;
+import com.kevinliu.springboogmallpractice.dto.ProductQueryParams;
 import com.kevinliu.springboogmallpractice.dto.ProductRequest;
 import com.kevinliu.springboogmallpractice.model.Product;
 import com.kevinliu.springboogmallpractice.repo.ProductRepo;
@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepo productRepo;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
-        return productRepo.getProducts(category, search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productRepo.getProducts(productQueryParams);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.kevinliu.springboogmallpractice.controller;
 
 import com.kevinliu.springboogmallpractice.constant.ProductCategory;
+import com.kevinliu.springboogmallpractice.dto.ProductQueryParams;
 import com.kevinliu.springboogmallpractice.dto.ProductRequest;
 import com.kevinliu.springboogmallpractice.model.Product;
 import com.kevinliu.springboogmallpractice.service.ProductService;
@@ -23,7 +24,11 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ){
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
