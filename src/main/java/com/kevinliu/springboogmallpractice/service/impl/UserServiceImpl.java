@@ -1,5 +1,6 @@
 package com.kevinliu.springboogmallpractice.service.impl;
 
+import com.kevinliu.springboogmallpractice.dto.UserLoginRequest;
 import com.kevinliu.springboogmallpractice.dto.UserRegisterRequest;
 import com.kevinliu.springboogmallpractice.model.User;
 import com.kevinliu.springboogmallpractice.repo.UserDao;
@@ -31,6 +32,22 @@ public class UserServiceImpl implements UserService {
 
         // Create user
         return userDao.createUser(userRegisterRequest);
+    }
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+
+        if (user == null){
+            log.warn("This email {} is not registered yet", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        if (user.getPassword().equals(userLoginRequest.getPassword())){
+            return user;
+        }else{
+            log.warn("Input password is wrong");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
