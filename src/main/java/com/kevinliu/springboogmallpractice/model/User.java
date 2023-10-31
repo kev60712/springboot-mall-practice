@@ -1,5 +1,6 @@
 package com.kevinliu.springboogmallpractice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,10 @@ public class User {
 
     private Integer userId;
     private String email;
+
+    @JsonIgnore
     private String password;
+
     private Date createdDate;
     private Date lastModifiedDate;
 

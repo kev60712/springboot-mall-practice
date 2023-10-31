@@ -3,6 +3,7 @@ package com.kevinliu.springboogmallpractice.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 public class UserRegisterRequest {
 
     @NotBlank
+    @Email
     private String email;
 
     @NotBlank
