@@ -136,6 +136,19 @@ public class ProductRepoImpl implements ProductRepo {
         namedParameterJdbcTemplate.update(sql, map);
     }
 
+    @Override
+    public void updateStock(Integer productId, Integer updatedStock) {
+        String sql = "UPDATE product SET stock = :stock, last_modified_date = :lastModifiedDate " +
+                "WHERE product_id = :productId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
+        map.put("stock", updatedStock);
+        map.put("lastModifiedDate", new Date());
+
+        namedParameterJdbcTemplate.update(sql, map);
+    }
+
     private String addFilteringSql(String sql, Map<String, Object> map, ProductQueryParams productQueryParams){
         if (productQueryParams.getCategory() != null){
             sql = sql + " AND category = :category";

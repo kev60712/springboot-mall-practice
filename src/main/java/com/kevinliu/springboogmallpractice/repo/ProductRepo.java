@@ -20,4 +20,6 @@ public interface ProductRepo {
 
     void deleteProductById(Integer productId);
 
+    void updateStock(Integer productId, Integer updatedStock);
+
 }
