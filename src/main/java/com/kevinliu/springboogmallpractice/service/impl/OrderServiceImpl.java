@@ -2,6 +2,7 @@ package com.kevinliu.springboogmallpractice.service.impl;
 
 import com.kevinliu.springboogmallpractice.dto.BuyItem;
 import com.kevinliu.springboogmallpractice.dto.CreateOrderRequest;
+import com.kevinliu.springboogmallpractice.dto.OrderQueryParams;
 import com.kevinliu.springboogmallpractice.model.Order;
 import com.kevinliu.springboogmallpractice.model.OrderItem;
 import com.kevinliu.springboogmallpractice.model.Product;
@@ -89,5 +90,22 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderItemList(orderItemList);
 
         return order;
+    }
+
+    @Override
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+        return orderDao.countOrder(orderQueryParams);
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        for (Order order : orderList){
+            List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(order.getOrderId());
+            order.setOrderItemList(orderItemList);
+        }
+
+        return orderList;
     }
 }

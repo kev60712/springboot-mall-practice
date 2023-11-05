@@ -1,5 +1,6 @@
 package com.kevinliu.springboogmallpractice.repo;
 
+import com.kevinliu.springboogmallpractice.dto.OrderQueryParams;
 import com.kevinliu.springboogmallpractice.model.Order;
 import com.kevinliu.springboogmallpractice.model.OrderItem;
 
@@ -14,5 +15,9 @@ public interface OrderDao {
     Order getOrderById(Integer orderId);
 
     List<OrderItem> getOrderItemsByOrderId(Integer orderId);
+
+    Integer countOrder(OrderQueryParams orderQueryParams);
+
+    List<Order> getOrders(OrderQueryParams orderQueryParams);
 
 }
